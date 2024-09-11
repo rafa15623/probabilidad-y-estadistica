@@ -1,0 +1,24 @@
+services:
+  jupyter-datascience:
+    image: rafa15623/my-datascience-image 
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      NB_USER: jovyan
+      NB_UID: 1000
+      NB_GID: 100
+      GRANT_SUDO: "yes"
+      JUPYTER_TOKEN: ""
+    ports:
+      - "8888:8888"  # Puerto para el servicio JupyterLab de la imagen personalizada
+    volumes:
+      - ${MY_DIR}:/home/jovyan/work  # Montar directorio local en el contenedor
+
+  jupyter-spark:
+    image: jupyter/pyspark-notebook  
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: ""
+    ports:
+      - "8889:8888"  # Puerto para el servicio JupyterLab con Spark y PySpark
+    volumes:
+      - ${MY_DIR}:/home/jovyan/work
